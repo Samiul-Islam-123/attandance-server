@@ -34,6 +34,14 @@ app.get('/', (req, res) => {
 io.on('connection', (socket) => {
   console.log('A client connected');
 
+  socket.on('start-camera', ()=>{
+    io.emit('start-attandance', true)
+  })
+
+  socket.on('ready-attandance', status=>{
+    io.emit('ready-camera', status)
+  })
+
   socket.on('face-matched', (name) => {
     const currentTime = moment().format('h:mm:ss A');
     
